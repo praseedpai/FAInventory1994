@@ -1,0 +1,292 @@
+
+*-----------FUNCTION ERROR MESSAGE TO DISPLAY ERROR MESSAGE
+*-----------CALL WITH ONE PARAMETER
+*--------------USAGE  err_msg( <message>)
+function err_msg
+param st
+PRIVATE kq,kek,wid
+kq=len(st)
+wid= kq+6
+mn=SEtcolor()
+kek=savescreen(19,39-int(wid/2),21,39+int(wid/2))
+setcolor("/w")
+set cursor off
+@ 19,39-int(wid/2)  clea to  21,39+int(wid/2)
+@ 19,39-int(wid/2) to  21,39+int(wid/2) double
+@ 20,39-int(kq/2) say st
+ret_val=inkey(0)
+SETCOLOr(mn)
+restscreen(19,39-int(wid/2),21,39+int(wid/2),kek)
+set cursor on
+RETURN (ret_val)
+* EOF err_msg
+*--------------------------------------------------------------------
+*PROCEDURE TO BE CALLED WHENEVER ESCAPE IS PRESSED
+*RELYS HEAVILY ON BEGIN SEQUENCE..END STRUCTURE
+*USE WITH CAUTION!
+proc esc_proc
+ private xd
+ xd=savescreen(10,44,12,64)
+ @ 10,44 to 12,64 double
+ rs=setcolor()
+ setcolor("n/w")
+ @ 10,44 clea to 12,64
+ set cursor off
+ @ 11,45 say "   CANCEL /RESUME   "
+     inkey(0)
+ restscreen(10,44,12,64,xd)
+   set cursor on
+ if chr(lastkey())$"cC"
+    setcolor("")
+    keyb chr(32)
+    break
+ Endif
+ keyb chr(32)
+ setcolor(rs)
+ retu
+*---------------------
+FUNCTION ISDIGIT
+PARAM _N
+RETURN (_N>='0' .AND. _N<='9')
+*----------------------------------
+* function to browse text file
+
+FUNCTION BROW
+param foo
+public filnam
+filnam=foo
+SELE 0
+use c:\simi\data\text
+ZAP
+KS=SAVESCREEN(1,0,24,78)
+append from &foo sdf
+go top
+set colo to /w
+@ 0,0 say space(79)
+@ 0,0 say  Center( "  F5-print   F10-Exit     ")
+set  colo to
+@ 1,0 to 24,78 double
+
+SET COLO TO G/W
+@ 2,12 say " S I M I L I A  H O M O E O   L A B O R A T O R Y "
+setcolor("w/n,n/W")
+
+dbedit(3,1,23,77,"","RAPPY","","","_","","","")
+USE
+set color to
+RESTSCREEN(1,0,24,78,KS)
+RETU 0
+*--------------------------------------------------
+  FUNC RAPPY
+  PARAM SN,FO
+   kes=lastkey()
+    Do case
+      Case kes=-9
+        Retu 0
+      case kes=-4
+        if !isprinter()
+          ERR_msg(" Printer not Ready ")
+         Else
+         Printfile( filnam)
+       endif
+      ENDCase
+     retu 1
+
+*---------------------------------
+Function Ispchar
+param _n
+return (_n>=' ' .and. _n<=chr(127))
+*-------------------------------------------------
+* next function is used extensievely in
+* edit_gro and Group file
+* look with care
+*---------------------------------------------------
+function funcr
+param dfg,klm
+   kes=lastkey()
+  do case
+  case kes=27
+   Retu 0
+  case kes=13
+      keyboard A_code
+      return 0
+  case ispchar(chr(kes))
+       foo=foo+chr(kes)
+  case kes==8
+       foo=substr(foo,1,len(foo)-1)
+   otherwise
+      retu 1
+   endcase
+
+      @ 22,35 say space(34)
+      @ 22,35 say foo
+       df=recno()
+    locate for upper( substr( A_desc, 1 , len(foo) ) )=upper(foo)
+      if !found()
+         goto df
+      endif
+    return 1
+*--------------------------------------------------------------
+* next function is common for edit_gro & sgr.prg
+*--------------------- Function for code_help
+
+*----------------procedure for COdehelp
+ PROC CODE_H
+ private fil[2]
+ set key 27 to
+ fil[1]="A_code"
+ fil[2]= "A_DESC"
+ private samp[2]
+ samp[1]=" CODE "
+ samp[2]= "          DESCRIPTION         "
+ xf=savescreen(4,34,23,71)
+ set key 28 to
+    rer=select()
+    sele 1
+   msav=setcolor("/w+,w+/n")
+    @ 4,34 to 21,71 double
+    go top
+    public foo
+    foo=""
+    dbedit(5,35,20,70,fil,"Funcr","",samp)
+     setcolor(msav)
+     select(rer)
+      set key 27 to Esc_proc
+      set key 28 to code_h
+      restscreen(4,34,23,71,xf)
+      release xf
+      retu
+*----------------------------------------------------
+*---------------------------------------------------
+*--------------------------------------------------------
+* Next function is the most important one
+* which edits journal entries
+* begin doc
+
+function lap
+parameter s,i
+*-----------------------------------------------
+ ker=lastkey()
+
+  if ker=27
+      keyb chr(13)
+      return 0
+  endif
+       ed_field=field(i+4)
+         if s=1
+             err_msg("   no more   ")
+             return 1
+        endif
+     if ker=24
+        if s=2 .and. jdesc <> space(25) .and. amount > 0 .and. (jcat="CR" .or. jcat="DR")
+           appen blank
+        endif
+    endif
+* case lastkey is escape
+
+    * case enter or alphanumeric
+     do case
+       case  isalpha(chr(ker)) .or. isdigit(chr(ker)) .or. ker=13  .or. ker=28
+          *------------------- do case field =1
+                SET KEY 27 TO
+                      if ker <>13
+                             keyboard chr(ker)
+                            endif
+
+                              if  i=1
+
+                              set key 28 to mode_h
+                               if ker <>28
+                            keyboard chr(28)
+                            endif
+                        wait ""
+                        set key 28 to
+          *----------------case field =2
+                     elseif i=2
+                        set cursor on
+                        @ row(),col() get &ed_field pict "!!" valid &ed_field="CR" .or. &ed_field="DR"
+                        read
+                       set cursor off
+                       keyboard chr(4)
+            *------------------------------case field==3
+                  elseif  i=3
+                        set cursor on
+                        @row(),col() get &ed_field pict "99999999999999.99" valid &ed_field>0
+                       read
+                       set cursor off
+                    endif
+               SET KEY 27 TO Esc_proc
+ *----------------------------------- case key is del
+     case ker=7
+       sele 3
+       delete
+       pack
+      if reccount()=0
+         appen blank
+      endif
+      keyboard chr(0)
+      return 2
+*----------------------------------------- case key is f2
+    case ker=-1
+         count for jcat="CR" to asd
+         count for jcat="DR" to asd1
+      if !((asd=1 .and. asd1>=1) .or. (asd>=1 .and. asd1=1))
+              err_msg("error")
+              return 1
+     endif
+           if (asd=1 .and. asd1>=1)
+               locate for jcat="CR"
+               sDR=jcode
+           else
+              locate for jcat="DR"
+              sDR=jcode
+          endif
+           go top
+            do while !eof()
+      if  jdesc <> space(25) .and. amount > 0 .and. (jcat="CR" .or. jcat="DR")
+        skip
+        loop
+      else
+       err_msg("missing entry")
+        return 1
+      endif
+       enddo
+        sum amount to jc1 for jcat="CR"
+        sum amount to jc2 for jcat="DR"
+        if jc1=jc2
+        return 0
+          else
+          err_msg("total disparity")
+          return 1
+        endif
+
+endcase
+return 1
+*---------------------------------------------
+*----------------------------------------------
+* fUNCTION TO EDIT_NARRATION
+* ------------------------------------------
+*-------------------------------already checked
+pROCEDURE Edit_Narr
+IF wHATER=="E"
+rv=savescreen(14,4,16,79)
+sET KEY 27 TO
+sET CURSOR ON
+
+@ 14,4 to 16,79 double
+@ 15,5 get narr_str  pict "@S70!"
+read
+Set cursor off
+rESTSCREEN(14,4,16,79,RV)
+SET KEY 27 TO eSC_PROC
+keyb chr(32)
+eLSE
+ eRR_MSG(ALLTRIM(NARR_STR))
+ENDIF
+Retu
+
+
+*----------------------------------------------------------
+*---------------------------------------------------------------
+*----------------------------------------------------------
+

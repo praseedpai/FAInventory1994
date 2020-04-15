@@ -1,0 +1,82 @@
+
+FUNCTION dAT_SAVE
+*--------------------------invoice.dbf
+SELE 1
+ APPEN BLANK
+FOR I=1 TO 11
+   SDMJ=FIELD(I)
+   REPLACE   &SDMJ WITH IN[I]
+NEXT I
+*---------------------------------------Stock Updation
+  SELE 4
+  GO TOP
+    DO WHILE !EOF()
+      SELE 2
+       SEEK D->CODE
+       IF !FOUND()
+            ?D->code
+
+            ERR_MSG(" aWKWARD SITUATION ")
+            QUIT
+       ENDIF
+     SELE 4
+        REPLACE  B->IT_QTY WITH B->IT_QTY -qUANT*packing
+        skip
+   ENDDO
+    ae="\invdump\"+"i"+alltrim(str(int(in[1])))
+    copy to (ae)
+     sele 4
+     go top
+     declare _code[2],_desc[2],_amount[2]
+         _code[1]='35001'
+         _code[2]='85001'
+         _desc[1]="cash a/c      "
+         _desc[2]=" Sales a/c    "
+        grsales=0.00
+        netdis=0.00
+        tax=0.00
+        Sum amount to grsales
+        Sum amount*disc/100 to Netdis
+        taxrate=ind[12]
+         sum (amount -amount*disc/100)*taxrate to tax for taxable=="Y"
+         _amount[1]=grsales-(netdis+tax)
+         _amount[2]=tax
+         _amount[3]=grsales
+         hifi=month(in[2])
+         mhifi=month(date())
+            hifi=iif(hifi>=4 .and. hifi<=12,hifi-3,hifi+9)
+            mhifi=iif(mhifi>=4 .and. mhifi<=12,mhifi-3,mhifi+9)
+
+ for i=1 to 3
+     sele 7
+     append blank
+     Replace j_id with in[11] ,jdate with in[2],jcode with _code[i],jdesc with _desc[i] ,jcat;
+     with iif(i==3,"CR","DR"),amount with  _amount[i]
+       *------------------------ posting to ledger
+         Sele 8
+           if i<>3
+               append blank
+               replace jid with in[11],jdate with in[2],Ac_1 with _code[i],Ac_2 with _code[3],;
+               amount with _amount[i]
+           endif
+       Sele 9
+          seek _code[i]
+             for k=hifi to mhifi
+                   rap='month'+iif(k<=9,'0'+str(k,1),str(k,2))
+               if  i==3
+                    replace &rap with &rap-(_amount[i])
+                else
+                    replace &rap with &rap+(_amount[i])
+               Endif
+          next k
+
+next i
+sele 1
+ for i=1 to 3
+    sdjm=field(i+11)
+    replace &sdjm with _amount[i]
+ next i
+
+  Return 0
+
+

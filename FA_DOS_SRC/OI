@@ -1,0 +1,36 @@
+Copies files and directory trees.
+
+XCOPY source [destination] [/A | /M] [/D[:date]] [/P] [/S [/E]] [/W]
+                           [/C] [/I] [/Q] [/F] [/L] [/H] [/R] [/T] [/U]
+                           [/K] [/N]
+
+ source       Specifies the file(s) to copy.
+ destination  Specifies the location and/or name of new files.
+ /A           Copies files with the archive attribute set,
+              doesn't change the attribute.
+ /M           Copies files with the archive attribute set,
+              turns off the archive attribute.
+ /D:date      Copies files changed on or after the specified date.
+              If no date is given, copies only those files whose
+              source time is newer than the destination time.
+ /P           Prompts you before creating each destination file.
+ /S           Copies directories and subdirectories except empty ones.
+ /E           Copies directories and subdirectories, including empty ones.
+              Same as /S /E. May be used to modify /T.
+ /W           Prompts you to press a key before copying.
+ /C           Continues copying even if errors occur.
+ /I           If destination does not exist and copying more than one file,
+              assumes that destination must be a directory.
+ /Q           Does not display file names while copying.
+ /F           Displays full source and destination file names while copying.
+ /L           Displays files that would be copied.
+ /H           Copies hidden and system files also.
+ /R           Overwrites read-only files.
+ /T           Creates directory structure, but does not copy files. Does not
+              include empty directories or subdirectories. /T /E includes
+              empty directories and subdirectories.
+ /U           Updates the files that already exist in destination.
+ /K           Copies attributes. Normal Xcopy will reset read-only attributes.
+ /Y           Overwrites existing files without prompting.
+ /-Y          Prompts you before overwriting existing files.
+ /N           Copy using the generated short names.

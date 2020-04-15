@@ -1,0 +1,19 @@
+function choo
+rs=savescreen(5,40,19,65)
+scroll(5,40,19,65,0)
+@ 5,40 to 19,65
+@ 6,41 prompt " APRIL 1994 "
+@ 7,41 PROMPT " MAY   1994 "
+@ 8,41 PROMPT " JUNE  1994 "
+@ 9,41 PROMPT " JULY  1994 "
+@ 10,41 PROMPT " AUG  1994 "
+@ 11,41 PROMPT " SEPT 1994 "
+@ 12,41 PROMPT " OCT  1994 "
+@ 13,41 PROMPT " NOV  1994 "
+@ 14,41 PROMPT " deC  1994 "
+@ 15,41 PROMPT " JAN  1995 "
+@ 16,41 PROMPT " FEB  1995 "
+@ 17,41 PROMPT " MAR  1995 "
+MENU TO SM
+  RETURN(SM)
+

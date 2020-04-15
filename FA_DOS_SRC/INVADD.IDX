@@ -1,0 +1,250 @@
+Add, 1, 4
+ADi, 5
+ALL, 4
+Amount, 2, 4
+Amount-amount, 4
+An, 1
+Analyzes, 1
+And, 5
+Appen, 2, 4
+Append, 4
+Array, 2
+Awe, 2, 4, 5
+
+B, 4
+Be, 1
+BEGIN, 2, 4
+Blank, 2, 3, 4
+Bott, 2
+
+Care, 5
+Case, 5
+Caution, 1
+Center, 2
+Change, 2
+CHR, 2, 3, 4, 5
+Clea, 3
+CLOSE, 4
+Code, 1, 2, 4, 5
+Codelist, 2
+Colo, 2, 3
+Confirm, 3
+Copy, 1
+CST, 3
+Ctod, 1, 2
+CUST, 3, 5
+Customer, 1, 3, 5
+
+D, 4
+Dat, 4
+Data, 1
+Date, 1, 2, 5
+DBEDIT, 1, 2, 4, 5
+Dbf, 1, 4
+Dealer, 1
+Deleted, 1
+Desc, 4
+Descr, 2
+Despatched, 1
+Detail, 1
+Df, 5
+Dfg, 5
+DIS, 4
+DISC, 2, 4
+Discount, 2
+DLR, 5
+Do, 2, 3, 4, 5
+Doi, 5
+Double, 1, 5
+DUPLICATE, 2
+
+E, 1
+Edit, 5
+Else, 3, 4
+Elseif, 3
+END, 1, 4
+Endcase, 5
+Enddo, 3, 4
+Endif, 1, 2, 3, 4, 6
+EOF, 4
+Err, 2, 3
+EsC, 2, 5
+ESC-cancel, 2
+Exit, 3
+Extensievely, 5
+
+F, 2
+FIELD, 4
+Fil, 5
+FILE, 1, 5
+FILL, 3
+Flag, 2
+Foo, 5
+For, 1, 4, 5
+FOUND, 2, 3, 5
+Frequent, 3
+Funcr, 5
+FUNCTION, 4, 5
+
+Get, 2, 3, 4
+Give, 5
+Go, 2, 4, 5
+Goto, 5
+Gro, 5
+Group, 5
+Grsales, 4
+Grsales-netdis, 4
+
+Head, 2, 4
+Heads, 1
+HELP, 3, 5
+Hidebox, 4
+
+I, 4
+If, 1, 2, 3, 4, 5
+Iif, 1
+Importrant, 1
+In, 1, 2, 3, 4, 5
+Ind, 2
+Inde, 1
+Index, 1
+Indflag, 3, 5
+Inv, 1
+INVALID, 2, 3
+Invno, 1, 2, 4
+Invoice, 1, 2, 4
+Is, 5
+Ispchar, 5
+IT, 4
+
+Kes, 5
+KEY, 2, 3, 4, 5
+KEYB, 2, 3, 4
+Keyboard, 5
+KGST, 3, 5
+Klm, 5
+
+Last, 4
+LASTKEY, 3, 5
+Len, 5
+Locate, 5
+Look, 5
+LOOP, 2, 3, 4
+Lr, 1
+
+Menu, 3
+Month, 1
+Most, 1
+Msav, 5
+Msg, 2, 3
+
+N, 2, 3, 5
+NAME, 5
+Netdis, 4
+Next, 1, 4, 5
+No, 1, 2
+Not, 3
+NUMBER, 2
+
+Of, 1, 2
+On, 1
+Orddate, 1
+Order, 1, 2
+Otherwise, 5
+
+Packing, 2, 4
+Param, 5
+Pic, 2, 4
+PICT, 3, 4
+Picture, 2
+Private, 2, 5
+PROC, 2, 5
+Program, 1, 5
+PROMPT, 1, 3
+PROMPTING, 1
+Public, 1, 2, 5
+
+QTY, 2, 4
+Quant, 4
+
+R, 1
+Rap, 4
+Rate, 2, 3, 4
+Read, 2, 3, 4
+Recno, 5
+Release, 5
+REPLACE, 2, 4, 5
+Rer, 5
+Restscreen, 5
+RETRY, 2
+RETU, 4, 5
+Return, 5, 6
+Rmn, 3
+Rsd, 1
+Rtotal, 5
+
+S, 2, 3
+Sal, 4, 5
+Samp, 5
+SAVE, 2, 4
+Savescreen, 5
+Say, 1, 2, 3, 4, 5
+Scroll, 1
+Sdis, 1
+SDMJ, 4
+SEEK, 2, 3, 4
+Sele, 1, 2, 3, 4, 5
+Select, 5
+SEQUENCE, 2, 4
+Set, 1, 2, 3, 4, 5
+Setcolor, 5
+Showbox, 4
+Skip, 4
+Space, 1, 2, 3, 5
+Stock, 1, 4
+Str, 1
+Sub, 1
+Subhea, 1
+Substr, 5
+Summary, 1
+System, 1
+
+T, 2, 3
+Tax, 3, 5
+Taxable, 2, 4
+Taxes, 4, 5
+Taxrate, 4
+Tdet, 1
+The, 1
+Through, 1
+Tind, 5
+To, 1, 2, 3, 4, 5
+TOP, 4, 5
+TRATE, 5
+
+Updation, 4
+Upper, 5
+Use, 1
+Used, 1, 5
+
+Valid, 1
+Vfile, 1
+
+W, 2, 3, 5
+While, 2, 3, 4
+WITH, 2, 4, 5
+
+Xf, 5
+
+Y, 2, 3, 4
+Yy, 3
+
+Zap, 1, 2
+J, 4
+SEEK, 2, 3, 4
+Sele, 1, 2, 3, 4, 5
+Select, 5
+SEQUENCE, 2, 4
+Set, 1, 2, 3, 4, 5
+Setcolor, 5
+Showbox, 4
